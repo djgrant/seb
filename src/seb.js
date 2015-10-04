@@ -1,10 +1,21 @@
-import $ from 'jquery';
-import extractArgs from './extractArgs';
-import StateAPI from './state';
+import each from './utils/each';
+import qsa from './utils/qsa';
+import extractArgs from './utils/extractArgs';
+import StateAPI from './api/state';
 
-export default {
+var _behaviourMethods = {};
 
-  createComponent: function(component) {
+var SEB = {
+
+  addAdaptor: adaptors => {
+    adaptors.forEach(adaptorMethods => {
+      each(adaptorMethods, key => {
+        _behaviourMethods[key] = adaptorMethods[key];
+      });
+    });
+  },
+
+  createComponent: component => {
 
     var {
       els,
@@ -16,44 +27,58 @@ export default {
 
     var $state = StateAPI(state);
 
-    // Register event handlers
-    Object.keys(events).forEach(selector => {
-      var $el = els[selector] || $(selector);
+    var getNodeList = function (selector) {
+      return els[selector] || qsa(selector);
+    }
 
-      Object.keys(events[selector]).forEach(event => {
-        $el.on(event, e => {
-          events[selector][event]($state);
+    // Register DOM nodes
+    each(els, selector => {
+      els[selector] = qsa(selector);
+    });
+
+    // Register event handlers
+    each(events, (selector) => {
+      var nodeList = getNodeList(selector);
+
+      each(events[selector], event => {
+        [].forEach.call(nodeList, node => {
+          node.addEventListener(event, e => {
+            events[selector][event]($state, e);
+          });
         });
       });
     });
 
     // Register behaviours
-    Object.keys(behaviours).forEach(selector => {
-      var $el = els[selector] || $(selector);
+    each(behaviours, (selector) => {
+      var nodeList = getNodeList(selector);
 
-      Object.keys(behaviours[selector]).forEach(method => {
+      each(behaviours[selector], method => {
         var def = behaviours[selector][method];
-        if (typeof def !== 'function'){
-          $el[method](def);
-        } else {
+        if (typeof def !== 'function') {
+          def && _behaviourMethods[method](nodeList, def);
+        }
+        else {
           var args = extractArgs(def);
-          function func() {
-            $el[method](def.apply(
-              this,
+          var onStateChange = () => {
+            var currentDef = def.apply(null,
               args.map(arg => $state.get(arg))
-            ));
+            );
+            currentDef && _behaviourMethods[method](nodeList, currentDef);
           };
           args.forEach(subState => {
-            $state.ready(subState, func);
-            $state.change(subState, func);
+            $state.ready(subState, onStateChange);
+            $state.change(subState, onStateChange);
           });
         }
       });
     });
 
     // Register state
-    Object.keys(state).forEach(subState => {
+    each(state, subState => {
       $state._initSet(subState, state[subState]);
     });
   }
 }
+
+export default SEB;

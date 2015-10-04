@@ -1,11 +1,13 @@
-import $ from 'jquery';
 import SEB from '../src/seb.js';
+import $ from '../src/adaptors/seb-jquery.js';
 
+SEB.addAdaptor([$]);
 SEB.createComponent({
 
   els: {
-    button: $('button'),
-    container: $('[data-key=container]')
+    button: 'button',
+    container: '[data-key=container]',
+    title: '[data-key=pageTitle]'
   },
 
   state: {
@@ -34,7 +36,9 @@ SEB.createComponent({
         border: `${count+1}px solid red`,
         transform: `rotate(${angle}deg)`,
         transition: `0.35s transform`
-      })
+      }),
+      fadeIn: count =>  count % 2 && 450,
+      fadeOut: count => count % 3 && 500
     }
   }
 
