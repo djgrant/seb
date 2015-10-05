@@ -1,7 +1,7 @@
 import SEB from '../src/seb.js';
 import $ from '../src/adaptors/seb-jquery.js';
 
-SEB.addAdaptor([$]);
+SEB.addAdaptor($);
 SEB.createComponent({
 
   els: {

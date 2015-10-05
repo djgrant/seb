@@ -8,6 +8,7 @@ var _behaviourMethods = {};
 var SEB = {
 
   addAdaptor: adaptors => {
+    [].concat(adaptors);
     adaptors.forEach(adaptorMethods => {
       each(adaptorMethods, key => {
         _behaviourMethods[key] = adaptorMethods[key];
