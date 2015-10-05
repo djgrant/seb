@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import each from '../utils/each';
 
 var methods = {};
 
