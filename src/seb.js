@@ -3,13 +3,13 @@ import qsa from './utils/qsa';
 import extractArgs from './utils/extractArgs';
 import StateAPI from './api/state';
 
+var _els = {};
 var _behaviourMethods = {};
 
 var SEB = {
 
   addAdaptor: adaptors => {
-    [].concat(adaptors);
-    adaptors.forEach(adaptorMethods => {
+    [].concat(adaptors).forEach(adaptorMethods => {
       each(adaptorMethods, key => {
         _behaviourMethods[key] = adaptorMethods[key];
       });
@@ -29,12 +29,12 @@ var SEB = {
     var $state = StateAPI(state);
 
     var getNodeList = function (selector) {
-      return els[selector] || qsa(selector);
+      return _els[selector] || qsa(selector);
     }
 
     // Register DOM nodes
     each(els, selector => {
-      els[selector] = qsa(selector);
+      _els[selector] = qsa(els[selector]);
     });
 
     // Register event handlers
