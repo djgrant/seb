@@ -14,11 +14,11 @@ SEB.createComponent({
 
   behaviours: {
     header: {
+      html: '<a href="/demos/">SEB demos</a>',
       css: {
         padding: '15px',
         background: '#01b69b',
         fontSize: 20,
-        color: 'white',
         zIndex: 1
       }
     }

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Example</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .container {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      .box {
+        padding-right: 10px;
+        background: #eee;
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        text-align: right;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 20px 20px;
+        background: white;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="header"></div>
+
+    <div class="container">
+      <div class="box"></div>
+    </div>
+
+    <div class="footer">
+      <button>Count</button>
+    </div>
+
+    <div class="counter"></div>
+
+    <script src="../../build/bundle.js"></script>
+  </body>
+</html>

@@ -31,14 +31,6 @@ SEB.createComponent({
     button: {
       html: count => count < 1 ? 'Start Counting!' : 'Incremenent'
     },
-    container: {
-      css: {
-        position: 'fixed',
-        left: '50%',
-        top: '50%',
-        transform: 'translateX(-50%) translateY(-50%)'
-      }
-    },
     box: {
       html: count => count,
       css: (count, angle) => ({
@@ -48,8 +40,8 @@ SEB.createComponent({
       fadeOut: count => count < 1 && 0,
       fadeIn: count => count > 0 && { queue: false, duration: 1000 },
       animate: count => ({
-        width: `${count * 25 + 50}`,
-        height: `${count * 25 + 50}`
+        width: `${count < 8 && count * 30 + 50}`,
+        height: `${count < 8 && count * 30 + 50}`
       }),
     },
     counter: {
@@ -60,5 +52,4 @@ SEB.createComponent({
       })
     }
   }
-
 });
