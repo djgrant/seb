@@ -1,7 +1,7 @@
 import each from './utils/each';
 import qsa from './utils/qsa';
 import extractArgs from './utils/extractArgs';
-import StateAPI from './api/state';
+import stateAPI from './api/state';
 
 var _els = {};
 var _behaviourMethods = {};
@@ -21,12 +21,11 @@ var SEB = {
     var {
       els,
       state,
-      initialState,
       events,
       behaviours
     } = component;
 
-    var $state = StateAPI(state);
+    var $state = stateAPI(state);
 
     var getNodeList = function (selector) {
       return _els[selector] || qsa(selector);

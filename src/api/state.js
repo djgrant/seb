@@ -26,7 +26,7 @@ export default function StateAPI(state) {
     },
 
     _execute: (obj, key) => {
-      if(obj[key]) {
+      if (obj[key]) {
         obj[key].forEach(cb => {
           cb();
         });
