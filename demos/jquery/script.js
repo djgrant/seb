@@ -1,13 +1,15 @@
-import SEB from '../src/seb.js';
-import $ from '../src/adaptors/seb-jquery.js';
+import SEB from '../../src/seb.js';
+import $ from '../../src/adaptors/seb-jquery.js';
+import classnames from '../../src/adaptors/seb-classnames.js';
 
-SEB.addAdaptor($);
+SEB.addAdaptor([$, classnames]);
 SEB.createComponent({
 
   els: {
     button: 'button',
     container: '[data-key=container]',
-    title: '[data-key=pageTitle]'
+    title: '[data-key=pageTitle]',
+    counter: '.counter'
   },
 
   state: {
@@ -39,6 +41,13 @@ SEB.createComponent({
       }),
       fadeIn: count =>  count % 2 && 450,
       fadeOut: count => count % 3 && 500
+    },
+    counter: {
+      classes: angle => ({
+        'wide': angle > 90,
+        'narrow': angle < 90,
+        'right-angle': angle === 90
+      })
     }
   }
 
