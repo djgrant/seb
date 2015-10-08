@@ -10,19 +10,37 @@
       }
       * {
         box-sizing: border-box;
+        position: relative;
+      }
+      .footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding: 20px 20px;
+        background: white;
+        border-top: 1px solid #eee;
+        text-align: center;
+      }
+      .box {
+        padding-right: 10px;
+        background: #eee;
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        text-align: right;
       }
     </style>
   </head>
   <body>
 
-    <div class="header">Demos</div>
+    <div class="header">SEB</div>
 
     <div class="container">
       <div class="box"></div>
     </div>
 
     <div class="footer">
-      <button>Button</button>
+      <button>Count</button>
     </div>
 
     <div class="counter"></div>

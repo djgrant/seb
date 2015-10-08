@@ -7,14 +7,15 @@ SEB.createComponent({
 
   els: {
     button: 'button',
-    container: '[data-key=container]',
-    title: '[data-key=pageTitle]',
-    counter: '.counter'
+    container: '.container',
+    counter: '.counter',
+    box: '.box'
   },
 
   state: {
     count: 0,
-    angle: 45
+    angle: -45,
+    boxAnimating: false
   },
 
   events: {
@@ -28,19 +29,28 @@ SEB.createComponent({
 
   behaviours: {
     button: {
-      css: count => ({ fontSize: count })
+      html: count => count < 1 ? 'Start Counting!' : 'Incremenent'
     },
-    '.container': {
+    container: {
+      css: {
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
+        transform: 'translateX(-50%) translateY(-50%)'
+      }
+    },
+    box: {
       html: count => count,
       css: (count, angle) => ({
-        width: 100,
-        height: 100,
-        border: `${count+1}px solid red`,
         transform: `rotate(${angle}deg)`,
         transition: `0.35s transform`
       }),
-      fadeIn: count =>  count % 2 && 450,
-      fadeOut: count => count % 3 && 500
+      fadeOut: count => count < 1 && 0,
+      fadeIn: count => count > 0 && { queue: false, duration: 1000 },
+      animate: count => ({
+        width: `${count * 25 + 50}`,
+        height: `${count * 25 + 50}`
+      }),
     },
     counter: {
       classes: angle => ({

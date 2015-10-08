@@ -15,11 +15,11 @@ SEB.createComponent({
   behaviours: {
     header: {
       css: {
-        padding: '10px 15px',
+        padding: '15px',
         background: '#01b69b',
-        borderBottom: '8px solid #eee',
-        fontSize: 30,
-        color: 'white'
+        fontSize: 20,
+        color: 'white',
+        zIndex: 1
       }
     }
   }
