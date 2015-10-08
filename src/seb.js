@@ -64,7 +64,7 @@ var SEB = {
             var currentDef = def.apply(null,
               args.map(arg => $state.get(arg))
             );
-            currentDef && _behaviourMethods[method](nodeList, currentDef);
+            currentDef !== false && _behaviourMethods[method](nodeList, currentDef);
           };
           args.forEach(subState => {
             $state.ready(subState, onStateChange);
