@@ -39,15 +39,30 @@ var SEB = {
     // Register event handlers
     each(events, (selector) => {
       var nodeList = getNodeList(selector);
+      var nodeEvents = events[selector];
+      var nodeCustomEvents = events[selector].custom;
 
-      each(events[selector], event => {
-        [].forEach.call(nodeList, node => {
-          node.addEventListener(event, e => {
-            events[selector][event]($state, e);
-          });
+      if (nodeCustomEvents) {
+        each(nodeCustomEvents, evName => {
+          var handler = nodeCustomEvents[evName];
+          registerEvent(nodeList, evName, handler);
+        });
+      }
+      else {
+        each(nodeEvents, evName => {
+          var handler = nodeEvents[evName];
+          registerEvent(nodeList, evName, handler);
+        });
+      }
+    });
+
+    function registerEvent(nodeList, event, handler) {
+      [].forEach.call(nodeList, node => {
+        node.addEventListener(event, e => {
+          handler($state, e.detail);
         });
       });
-    });
+    }
 
     // Register behaviours
     each(behaviours, (selector) => {
@@ -55,20 +70,41 @@ var SEB = {
 
       each(behaviours[selector], method => {
         var def = behaviours[selector][method];
-        if (typeof def !== 'function') {
-          def && _behaviourMethods[method](nodeList, def);
+        var defIsStatic = typeof def !== 'function';
+        var isCustomEvent = !(method in _behaviourMethods);
+
+        if (defIsStatic) {
+          getCallback()(def);
         }
         else {
+          injectArgs(def, getCallback());
+        }
+
+        function injectArgs(def, callback) {
           var args = extractArgs(def);
           var onStateChange = () => {
             var currentDef = def.apply(null,
               args.map(arg => $state.get(arg))
             );
-            currentDef !== false && _behaviourMethods[method](nodeList, currentDef);
+            callback(currentDef);
           };
           args.forEach(subState => {
             $state.ready(subState, onStateChange);
             $state.change(subState, onStateChange);
+          });
+        }
+
+        function getCallback() {
+          return isCustomEvent ? dispatchCustomEvent : callAdaptorMethod;
+        }
+
+        function callAdaptorMethod(def) {
+          def !== false && _behaviourMethods[method](nodeList, def);
+        }
+
+        function dispatchCustomEvent(def) {
+          [].forEach.call(nodeList, node => {
+            node.dispatchEvent(new CustomEvent(method, { detail: def }));
           });
         }
       });
