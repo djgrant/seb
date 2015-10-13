@@ -19,6 +19,7 @@ var SEB = {
   createComponent: component => {
 
     var {
+      self,
       els,
       state,
       events,
@@ -27,14 +28,19 @@ var SEB = {
 
     var $state = stateAPI(state);
 
+    // Register DOM nodes
+    var _self = qsa(self);
+
+    each(els, selector => {
+      _els[selector] = qsa(els[selector], _self[0]);
+    });
+
     var getNodeList = function (selector) {
+      if (selector === 'self') {
+        return _self;
+      }
       return _els[selector] || qsa(selector);
     }
-
-    // Register DOM nodes
-    each(els, selector => {
-      _els[selector] = qsa(els[selector]);
-    });
 
     // Register event handlers
     each(events, (selector) => {
@@ -114,6 +120,9 @@ var SEB = {
     each(state, subState => {
       $state._initSet(subState, state[subState]);
     });
+
+    // Dispatch lifecycle events
+    _self[0].dispatchEvent(new CustomEvent('inDOM', { detail: null }));
   }
 }
 

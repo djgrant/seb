@@ -4,16 +4,14 @@ import $ from '../../src/adaptors/seb-jquery.js';
 SEB.addAdaptor($);
 SEB.createComponent({
 
+  self: '.header',
 
-  els: {
-    header: '.header'
-  },
-
+  els: {},
   state: {},
   events: {},
 
   behaviours: {
-    header: {
+    self: {
       html: '<a href="/demos/">SEB demos</a>',
       css: {
         padding: '15px',

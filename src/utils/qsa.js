@@ -1,5 +1,5 @@
-function qsa(selector) {
-  return document.querySelectorAll(selector);
+function qsa(selector, parent=document) {
+  return parent.querySelectorAll(selector);
 }
 
 export default qsa;

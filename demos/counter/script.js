@@ -5,20 +5,27 @@ import classnames from '../../src/adaptors/seb-classnames.js';
 SEB.addAdaptor([$, classnames]);
 SEB.createComponent({
 
+  self: '.counter',
+
   els: {
     button: 'button',
     container: '.container',
-    counter: '.counter',
-    box: '.box'
+    box: '.box',
+    header: '.header'
   },
 
   state: {
+    ready: false,
     count: 0,
     angle: -45,
-    boxAnimating: false
   },
 
   events: {
+    self: {
+      inDOM: $state => {
+        $state.set('ready', true);
+      }
+    },
     button: {
       click: $state => {
         $state.set('count', $state.get('count') + 1);
