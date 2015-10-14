@@ -7,11 +7,22 @@ SEB.createComponent({
   self: '.header',
 
   els: {},
-  state: {},
-  events: {},
+
+  state: {
+    hidden: false
+  },
+
+  events: {
+    self: {
+      hide: ($state, payload) => {
+        $state.set('hidden', payload);
+      }
+    }
+  },
 
   behaviours: {
     self: {
+      hide: hidden => hidden,
       html: '<a href="/demos/">SEB demos</a>',
       css: {
         padding: '15px',
