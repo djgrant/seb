@@ -105,7 +105,14 @@ var SEB = {
         }
 
         function callAdaptorMethod(def) {
-          def !== false && _behaviourMethods[method](nodeList, def);
+          if (def !== false) {
+            try {
+              _behaviourMethods[method](nodeList, def);
+            }
+            catch (e) {
+              throw [e, state];
+            }
+          }
         }
 
         function dispatchCustomEvent(def) {
