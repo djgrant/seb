@@ -4,7 +4,7 @@ import $ from '../../src/adaptors/seb-jquery.js';
 SEB.addAdaptor($);
 SEB.createComponent({
 
-  self: '.header',
+  self: 'seb-header',
 
   els: {},
 
@@ -16,6 +16,9 @@ SEB.createComponent({
     self: {
       hide: ($state, payload) => {
         $state.set('hidden', payload);
+      },
+      inDOM: () => {
+        document.addEventListener('evt', function () { console.log('it worked')});
       }
     }
   },

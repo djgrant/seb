@@ -129,7 +129,9 @@ var SEB = {
     });
 
     // Dispatch lifecycle events
-    _self[0].dispatchEvent(new CustomEvent('inDOM', { detail: null }));
+    [].forEach.call(_self, node => {
+      node.dispatchEvent(new CustomEvent('inDOM', { detail: null }));
+    });
   }
 }
 

@@ -6,13 +6,12 @@ import $dispatch from '../../src/api/dispatcher.js';
 SEB.addAdaptor([$, classnames]);
 SEB.createComponent({
 
-  self: '.counter',
+  self: 'seb-counter',
 
   els: {
     button: 'button',
     container: '.container',
-    box: '.box',
-    header: '.header'
+    box: '.box'
   },
 
   state: {
@@ -25,7 +24,8 @@ SEB.createComponent({
     self: {
       inDOM: ($state) => {
         $state.set('ready', true);
-        $dispatch.to(document.querySelector('.header')).event('hide', true);
+        $dispatch.to('seb-header').event('hide', true);
+        $dispatch.event('evt', false);
       }
     },
     button: {
