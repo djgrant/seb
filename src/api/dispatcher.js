@@ -1,19 +1,13 @@
+import makeProp from '../utils/makeProp';
+
 var proto = {
   to: function (element) {
-    this.element = element;
-    return this;
+    return Object.create(this, makeProp('element', element));
   },
   event: function (event, payload) {
     this.element.dispatchEvent(new CustomEvent(event, { detail: payload }));
+    return this;
   }
 };
 
-var defaultProps = {
-  element: {
-    writable: true,
-    configurable: true,
-    value: document
-  }
-};
-
-export default Object.create(proto, defaultProps);
+export default Object.create(proto, makeProp('element', document));
