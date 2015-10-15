@@ -1,9 +1,8 @@
 var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
 var COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-var WHITESPACE = /\s*/;
 
 function trim(str) {
-  return str.replace(WHITESPACE, '');
+  return str.trim();
 }
 
 function extractArgs(func) {
