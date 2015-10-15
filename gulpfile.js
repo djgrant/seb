@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var getTask = require('lmn-gulp-tasks');
+var Karma = require('karma').Server;
 
 var config = {
   js: {
@@ -33,6 +34,12 @@ gulp.task('js-watch', getTask('browserify', {
 }));
 
 gulp.task('build', ['js']);
+
+gulp.task('test', function (done) {
+  new Karma({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
+});
 
 gulp.task('default', ['build'], function () {
   browserSync.init([

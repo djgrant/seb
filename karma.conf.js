@@ -5,11 +5,12 @@ module.exports = function (config) {
     frameworks: ['mocha', 'should', 'browserify'],
 
     files: [
-      'test/**/*.spec.js'
+      'test/**/*.spec.js',
+      'src/**/*.spec.js'
     ],
 
     preprocessors: {
-      'test/**/*.spec.js': ['browserify']
+      'src/**/*.spec.js': ['browserify']
     },
 
     babelPreprocessor: {
