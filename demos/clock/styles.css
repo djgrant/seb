@@ -1,0 +1,43 @@
+html {
+  background: #fd5c63;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  position: absolute;
+  min-width: 740px;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.card {
+  float: left;
+  width: 110px;
+  background: #f1f1f1;
+  border: 1px solid #df4148;
+  border-radius: 4px;
+  font-size: 50px;
+  margin: 0 5px;
+}
+
+.card-divider {
+  float: left;
+  width: 5px;
+}
+
+.card,
+.card-divider {
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+}
+
+.second-1,
+.second-2 {
+  font-weight: 100;
+}
