@@ -1,7 +1,7 @@
 import SEB from '../../src/seb.js';
 import $ from '../../src/adaptors/seb-jquery.js';
 import classnames from '../../src/adaptors/seb-classnames.js';
-import $dispatch from '../../src/api/dispatcher.js';
+import $broadcast from '../../src/api/dispatcher.js';
 
 SEB.addAdaptor([$, classnames]);
 SEB.createComponent({
@@ -24,8 +24,8 @@ SEB.createComponent({
     self: {
       inDOM: ($state) => {
         $state.set('ready', true);
-        $dispatch.to('seb-header').event('hide', true);
-        $dispatch.event('evt', false);
+        $broadcast.to('seb-header').event('hide', true);
+        $broadcast.event('evt', false);
       }
     },
     button: {

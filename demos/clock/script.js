@@ -1,7 +1,7 @@
 import SEB from '../../src/seb.js';
 import $ from '../../src/adaptors/seb-jquery.js';
 import classnames from '../../src/adaptors/seb-classnames.js';
-import $dispatch from '../../src/api/dispatcher.js';
+import $broadcast from '../../src/api/dispatcher.js';
 
 SEB.addAdaptor([$, classnames]);
 SEB.createComponent({
@@ -73,7 +73,7 @@ SEB.createComponent({
 });
 
 function tick() {
-  $dispatch.to('seb-clock').event('tick', true);
+  $broadcast.to('seb-clock').event('tick', true);
 }
 
 function parse(num) {
