@@ -1,8 +1,8 @@
 {
   "name": "seb",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "index.js",
+  "main": "src/seb.js",
   "scripts": {
     "start": "gulp",
     "test": "karma start --single-run"
