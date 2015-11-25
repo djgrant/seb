@@ -2,11 +2,18 @@ import each from './utils/each';
 import qsa from './utils/qsa';
 import extractArgs from './utils/extractArgs';
 import stateAPI from './api/state';
+import sebJQuery from './adaptors/seb-jquery';
+import sebClassnames from './adaptors/seb-classnames';
 
 var _els = {};
 var _behaviourMethods = {};
 
 var SEB = {
+
+  adaptors: {
+    jquery: sebJQuery,
+    classnames: sebClassnames
+  },
 
   addAdaptor: adaptors => {
     [].concat(adaptors).forEach(adaptorMethods => {
