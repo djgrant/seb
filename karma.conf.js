@@ -10,7 +10,7 @@ module.exports = function (config) {
     ],
 
     preprocessors: {
-      'src/**/*.spec.js': ['browserify']
+      './**/*.spec.js': ['browserify']
     },
 
     babelPreprocessor: {
