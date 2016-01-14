@@ -6,7 +6,7 @@ Create reactive components in sites without the luxury of a virtual DOM
   <img src="https://img.shields.io/codeship/26c45920-55a8-0133-691e-56be39fb689c.svg" alt="Codeship Status for djgrant/seb">
 </a>
 
-SEB is a library for creating components in the browsers DOM that facilitates a one way data flow: Events -> State -> Behaviours.
+SEB is a library for creating components in a browser's actual DOM by facilitating a one way data flow: `Events -> State -> Behaviours`.
 
 Events can only change state, and behaviours in turn respond to state changes. Adaptors allow custom behaviour methods to be made available. For example, the jquery adaptor allows you to use jquery methods declaratively, triggering them as a representation of component's state.
 
