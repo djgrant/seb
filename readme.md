@@ -14,7 +14,7 @@ Events can only change state, and behaviours in turn respond to state changes. A
 
 A sample counter component:
 
-```
+```js
 import SEB from 'seb';
 import $ from 'seb-adaptor-jquery';
 import classnames from 'seb-adaptor-classnames';
